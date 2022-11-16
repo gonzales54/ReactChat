@@ -1,28 +1,30 @@
-import { useEffect, useState } from 'react'
-import { db } from './FirebaseConfig';
-import { collection, DocumentData, getDocs, QuerySnapshot } from 'firebase/firestore';
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import HomeView from "./components/views/HomeView"
+import ChatView from "./components/views/ChatView"
+import AddUserView from "./components/views/AddUserView"
+import LoginView from "./components/views/LoginView"
+import RegisterView from "./components/views/RegisterView"
+import NotFoundView from "./components/views/NotFound"
+
 
 const App = () => {
-  const [allUser, setAllUser] = useState<any>([])
-  const docRef = collection(db, "users")
-
-  useEffect(() => {
-    getDocs(docRef)
-      .then((snapshot: QuerySnapshot<DocumentData>) => {
-        console.log(snapshot.docs.map((doc) => ({ ...doc.data() })))
-        setAllUser(snapshot.docs.map((doc) => ({ ...doc.data() })));
-      })
-  }, [])
-
   return (
-    <div className="App">
-      <h1>Hello</h1>
-      {allUser.map((item: any, index: number) => {
-        return (
-          <p key={index}>{item.information.name}</p>
-        )
-      })}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={
+          <HomeView />
+        } />
+        <Route path="/:user" element={
+          <ChatView />
+        } />
+        <Route path="/adduser" element={
+          <AddUserView />
+        } />
+        <Route path="/login" element={<LoginView />} />
+        <Route path="/register" element={<RegisterView />} />
+        <Route path="*" element={<NotFoundView />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
