@@ -6,6 +6,7 @@ import LoginView from "./components/views/LoginView"
 import RegisterView from "./components/views/RegisterView"
 import NotFoundView from "./components/views/NotFound"
 import { AuthProvider } from "./Context/AuthContext"
+import UserGuard from "./Guard/UserGuard"
 
 
 const App = () => {
@@ -14,13 +15,19 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={
-            <HomeView />
+            <UserGuard>
+              <HomeView />
+            </UserGuard>
           } />
           <Route path="/:user" element={
-            <ChatView />
+            <UserGuard>
+              <ChatView />
+            </UserGuard>
           } />
           <Route path="/adduser" element={
-            <AddUserView />
+            <UserGuard>
+              <AddUserView />
+            </UserGuard>
           } />
           <Route path="/login" element={<LoginView />} />
           <Route path="/register" element={<RegisterView />} />
