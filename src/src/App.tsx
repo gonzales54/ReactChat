@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import { db } from './FirebaseConfig';
 import { collection, DocumentData, getDocs, QuerySnapshot } from 'firebase/firestore';
 
-function App() {
+const App = () => {
   const [allUser, setAllUser] = useState<any>([])
-
   const docRef = collection(db, "users")
 
   useEffect(() => {
