@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
 import { db } from './FirebaseConfig';
 import { collection, DocumentData, getDocs, QuerySnapshot } from 'firebase/firestore';
 
