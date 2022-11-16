@@ -6,7 +6,14 @@ import { collection, DocumentData, getDocs, QuerySnapshot } from 'firebase/fires
 const HomeView = () => {
 	const [allUser, setAllUser] = useState<any>([])
 	const docRef = collection(db, "users")
-
+	
+	useEffect(() => {
+		getDocs(docRef)
+		.then((snapshot: QuerySnapshot<DocumentData>) => {
+			console.log(snapshot.docs.map((doc) => ({ ...doc.data() })))
+			setAllUser(snapshot.docs.map((doc) => ({ ...doc.data() })));
+		})
+	}, []);
 	return (
 		<div>
 			<h1>Home</h1>
