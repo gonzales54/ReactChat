@@ -1,6 +1,6 @@
 import { signOut } from "firebase/auth";
 import { doc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { auth, db } from "../../FirebaseConfig";
@@ -14,16 +14,22 @@ const ChatView = () => {
 	const { user } = useAuth();
 	const [isClick, setClick] = useState<boolean>(false);
 	const [messages, setMessages] = useState<any>([]);
+	const chatRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		const docRef = doc(db, "messages", (user?.uid + information.data.uid).match(/.{1}/g).sort().join(''))
+		const height: number | undefined = chatRef.current?.scrollHeight;
+
 		onSnapshot(docRef, (doc) => {
 			if (doc.data() === undefined || null) {
 				setMessages({})
 			} else {
 				const data = Object.values(doc.data()!);
-				console.log(data);
 				setMessages(data);
+				chatRef.current?.scrollTo({
+					top: Number(height),
+					behavior: 'smooth'
+				})
 			}
 		})
 	}, [params]);
@@ -121,22 +127,23 @@ const ChatView = () => {
 				*/}
 				<div className="px-4">
 					{information.userInformation.map((item: any, index: number) => {
-						if (item.information.name === params.user) {
-							return (
-								<div className="py-3 flex items-center" key={index}>
-									<p className="mr-3">
-										<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
-									</p>
-									<div>
-										<h3 className="py-1 text-white text-20 font-medium">{item.information.name}</h3>
+						if(item.information.uid !== user?.uid) {
+							if (item.information.name === params.user) {
+								return (
+									<div className="py-3 flex items-center" key={index}>
+										<p className="mr-3">
+											<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
+										</p>
+										<div>
+											<h3 className="py-1 text-white text-20 font-medium">{item.information.name}</h3>
 
-										{/*
+											{/*
 										<p className="text-14 text-gray-400">Hello World.</p>
 										*/}
-									</div>
-									<div className="ml-auto text-center">
+										</div>
+										<div className="ml-auto text-center">
 
-										{/*
+											{/*
 										<p className="mb-1 block text-white text-12">20:21</p>
 										<span>
 											<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-white">
@@ -146,24 +153,24 @@ const ChatView = () => {
 										
 										<p className="px-2 py-1 inline-block radius-circle bg-green-400 text-12 text-white">2</p>
 									*/}
+										</div>
 									</div>
-								</div>
-							)
-						} else {
-							return (
-								<Link to={'/' + item.information.name} className="py-3 flex items-center" key={index} state={{ data: item.information, userInformation: information.userInformation }} >
-									<p className="mr-3">
-										<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
-									</p>
-									<div>
-										<h3 className="py-1 text-white text-20 font-medium">{item.information.name}</h3>
-										{/*
+								)
+							} else {
+								return (
+									<Link to={'/' + item.information.name} className="py-3 flex items-center" key={index} state={{ data: item.information, userInformation: information.userInformation }} >
+										<p className="mr-3">
+											<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
+										</p>
+										<div>
+											<h3 className="py-1 text-white text-20 font-medium">{item.information.name}</h3>
+											{/*
 										<p className="text-14 text-gray-400">Hello World.</p>
 										*/}
-									</div>
-									<div className="ml-auto text-center">
+										</div>
+										<div className="ml-auto text-center">
 
-										{/*
+											{/*
 									<p className="mb-1 block text-white text-12">20:21</p>
 									<span>
 										<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-white">
@@ -172,14 +179,15 @@ const ChatView = () => {
 									</span>
 									<p className="px-2 py-1 inline-block radius-circle bg-green-400 text-12 text-white">2</p>
 									*/}
-									</div>
-								</Link>
-							)
+										</div>
+									</Link>
+								)
+							}
 						}
 					})}
 				</div>
 			</div>
-			<main className="h-full flex flex-col justify-between bg-gray-300">
+			<main className="h-full flex flex-col justify-between bg-gray-300" ref={chatRef}>
 				<div className="px-3 py-3 overflow-y-scroll">
 					{messages.length ?
 						messages
