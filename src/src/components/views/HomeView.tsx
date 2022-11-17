@@ -99,7 +99,7 @@ const HomeView = () => {
 					})}
 				</div>
 			</div>
-			<button onClick={LogOut}>Logout</button>
+			<main className="h-full flex flex-col justify-between bg-gray-300"></main>
 		</div>
 	)
 }
