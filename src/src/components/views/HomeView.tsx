@@ -17,7 +17,6 @@ const HomeView = () => {
 	useEffect(() => {
 		getDocs(docRef)
 		.then((snapshot: QuerySnapshot<DocumentData>) => {
-			console.log(snapshot.docs.map((doc) => ({ ...doc.data() })))
 			setAllUser(snapshot.docs.map((doc) => ({ ...doc.data() })));
 		})
 	}, []);
@@ -28,7 +27,7 @@ const HomeView = () => {
 	}
 	
 	return (
-		<div>
+		<div className='w-100 mx-auto grid grid-column-3'>
 			<div className="bg-gray-800 overflow-y-scroll">
 				<header className="w-100 mb-6 px-4 shadow-w relative">
 					<div className="py-3 flex items-center">
