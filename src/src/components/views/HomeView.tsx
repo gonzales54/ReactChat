@@ -69,18 +69,19 @@ const HomeView = () => {
 
 				<div className="px-4">
 					{allUser.map((item: any, index: number) => {
-						return (
-							<Link to={item.information.name} className="py-3 flex items-center" key={index} state={{ data: item.information, userInformation: allUser }} >
-								<p className="mr-3">
-									<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
-								</p>
-								<div>
-									<h3 className="py-1 text-white text-20 font-medium">{item.information.name}</h3>
-									{/*
+						if(item.information.uid !== user?.uid) {
+							return (
+								<Link to={item.information.name} className="py-3 flex items-center" key={index} state={{ data: item.information, userInformation: allUser }} >
+									<p className="mr-3">
+										<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
+									</p>
+									<div>
+										<h3 className="py-1 text-white text-20 font-medium">{item.information.name}</h3>
+										{/*
 									<p className="text-14 text-gray-400">Hello World.</p>
 									*/}
-								</div>
-								{/* <div className="ml-auto text-center">
+									</div>
+									{/* <div className="ml-auto text-center">
 
 									
 									<p className="mb-1 block text-white text-12">20:21</p>
@@ -93,8 +94,9 @@ const HomeView = () => {
 									<p className="px-2 py-1 inline-block radius-circle bg-green-400 text-12 text-white">2</p>
 								
 								</div>*/}
-							</Link>
-						)
+								</Link>
+							)
+						}
 					})}
 				</div>
 			</div>
