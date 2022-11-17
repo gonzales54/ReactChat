@@ -189,7 +189,7 @@ const ChatView = () => {
 									return (
 										<div className="px-4 py-2 flex" key={index}>
 											<p className="mr-3">
-												<img src="src/assets/person1.jpg" alt="" className="w-12 h-12 block radius-circle object-cover" />
+												<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
 											</p>
 											<div className="pt-2">
 												<div className="mb-3 flex">
@@ -216,7 +216,7 @@ const ChatView = () => {
 												</div>
 											</div>
 											<p className="ml-3">
-												<img src="src/assets/person1.jpg" alt="" className="w-12 h-12 block radius-circle object-cover" />
+												<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
 											</p>
 										</div>
 									)
