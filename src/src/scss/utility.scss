@@ -524,4 +524,8 @@
 		padding-left: 0.25rem !important;
 		padding-right: 0.25rem !important;
 	}
+	.sflex-col {
+		display: flex !important;
+		flex-direction: column;
+	}
 }

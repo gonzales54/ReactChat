@@ -29,7 +29,7 @@ const HomeView = () => {
 	return (
 		<div className='w-100 mx-auto grid grid-column-3'>
 			<div className="bg-gray-800 overflow-y-scroll">
-				<header className="w-100 mb-6 px-4 shadow-w relative">
+				<header className="w-100 mb-6 px-4 shadow-w relative spx-4 sflex-col">
 					<div className="py-3 flex items-center">
 						<p className="mr-3">
 							<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
@@ -67,11 +67,11 @@ const HomeView = () => {
 				</form>				
 				*/}
 
-				<div className="px-4">
+				<div className="px-4 spx-4">
 					{allUser.map((item: any, index: number) => {
 						if(item.information.uid !== user?.uid) {
 							return (
-								<Link to={item.information.name} className="py-3 flex items-center" key={index} state={{ data: item.information, userInformation: allUser }} >
+								<Link to={item.information.name} className="py-3 flex items-center sflex-col" key={index} state={{ data: item.information, userInformation: allUser }} >
 									<p className="mr-3">
 										<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
 									</p>

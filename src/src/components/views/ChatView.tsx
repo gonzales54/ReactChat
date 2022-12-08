@@ -94,7 +94,7 @@ const ChatView = () => {
 	return (
 		<div className="w-100 mx-auto grid grid-column-3">
 			<div className="bg-gray-800 overflow-y-scroll">
-				<header className="w-100 mb-6 px-4 shadow-w relative spx-4">
+				<header className="w-100 mb-6 px-4 shadow-w relative spx-4 sflex-col">
 					<div className="py-3 flex items-center">
 						<p className="mr-3">
 							<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
@@ -130,7 +130,7 @@ const ChatView = () => {
 						if(item.information.uid !== user?.uid) {
 							if (item.information.name === params.user) {
 								return (
-									<div className="py-3 flex items-center" key={index}>
+									<div className="py-3 flex items-center sflex-col" key={index}>
 										<p className="mr-3">
 											<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
 										</p>
@@ -158,7 +158,7 @@ const ChatView = () => {
 								)
 							} else {
 								return (
-									<Link to={'/' + item.information.name} className="py-3 flex items-center" key={index} state={{ data: item.information, userInformation: information.userInformation }} >
+									<Link to={'/' + item.information.name} className="py-3 flex items-center sflex-col" key={index} state={{ data: item.information, userInformation: information.userInformation }} >
 										<p className="mr-3">
 											<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
 										</p>
