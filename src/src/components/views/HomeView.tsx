@@ -29,8 +29,8 @@ const HomeView = () => {
 	return (
 		<div className='w-100 mx-auto grid grid-column-3'>
 			<div className="bg-gray-800 overflow-y-scroll">
-				<header className="w-100 mb-6 px-4 shadow-w relative spx-4 sflex-col">
-					<div className="py-3 flex items-center">
+				<header className="w-100 mb-6 px-4 shadow-w relative spx-4">
+					<div className="py-3 flex items-center sflex-col">
 						<p className="mr-3">
 							<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
 						</p>
