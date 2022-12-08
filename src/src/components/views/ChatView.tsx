@@ -94,7 +94,7 @@ const ChatView = () => {
 	return (
 		<div className="w-100 mx-auto grid grid-column-3">
 			<div className="bg-gray-800 overflow-y-scroll">
-				<header className="w-100 mb-6 px-4 shadow-w relative">
+				<header className="w-100 mb-6 px-4 shadow-w relative spx-4">
 					<div className="py-3 flex items-center">
 						<p className="mr-3">
 							<img src={person1} alt="" className="w-12 h-12 block radius-circle object-cover" />
@@ -125,7 +125,7 @@ const ChatView = () => {
 					</div>
 				</form>
 				*/}
-				<div className="px-4">
+				<div className="px-4 spx-4">
 					{information.userInformation.map((item: any, index: number) => {
 						if(item.information.uid !== user?.uid) {
 							if (item.information.name === params.user) {
